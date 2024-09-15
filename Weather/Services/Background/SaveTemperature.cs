@@ -13,18 +13,7 @@ public class TemperatureUpdateService : BackgroundService
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
-
-        // _timer = new Timer(GetTemperatureFromArduino, null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
-        // return Task.CompletedTask;
-
-        var now = DateTime.Now;
-        var minutesToNextInterval = 10 - (now.Minute % 5);
-        var nextInterval = now.AddMinutes(minutesToNextInterval).AddSeconds(-now.Second);
-
-        var timeUntilNextInterval = nextInterval - now;
-
-
-        _timer = new Timer(GetTemperatureFromArduino, null, timeUntilNextInterval, TimeSpan.FromMinutes(5));
+        _timer = new Timer(GetTemperatureFromArduino, null, TimeSpan.Zero, TimeSpan.FromSeconds(60));
         return Task.CompletedTask;
     }
 
